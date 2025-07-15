@@ -55,6 +55,13 @@ class Aside extends Component
                 "is_dropdown" => false,
             ],
             [
+                "label" => "Pengeluaran Barang",
+                "icon" => "fas fa-store",
+                "route_name" => "pengeluaran-barang.index",
+                "route_active" => "pengeluaran-barang.*",
+                "is_dropdown" => false,
+            ],
+            [
                 "label" => "Laporan",
                 "icon" => "fas fa-file-invoice",
                 "route_active" => "laporan.*",
