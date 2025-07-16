@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ItemPengeluaranBarang;
 use App\Models\PengeluaranBarang;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,5 +67,20 @@ class PengeluaranBarangController extends Controller
         toast()->success('Transaksi Tersimpan');
         return redirect()->route('pengeluaran-barang.index');
         
+    }
+
+    public function laporan(){
+        $data = PengeluaranBarang::orderBy('created_at', 'desc')->get()->map(function($item){
+            $item->tanggal_transaksi = Carbon::parse($item->created_at)->locale('id')->translatedFormat('l,d F Y');
+            return $item;
+        });
+        return view('laporan.pengeluaran-barang.laporan', compact('data'));
+    }
+
+    public function detailLaporan(String $nomorPengeluaran){
+        $data = PengeluaranBarang::with('items')->where('nomor_pengeluaran', $nomorPengeluaran)->first();
+        $data->total_harga = $data->items->sum('sub_total');
+        $data->tanggal_transaksi = Carbon::parse($data->created_at)->locale('id')->translatedFormat('l,d F Y');
+        return view('laporan.pengeluaran-barang.detail', compact('data'));
     }
 }

@@ -48,13 +48,13 @@
                             <td class="text-center">{{ $i + 1 }}</td>
                             <td>{{ $item->nama_produk }}</td>
                             <td>{{ number_format($item->qty) }} <small>Pcs</small></td>
-                            <td>Rp. {{ number_format( $item->harga_beli, 0,',','.') }}</td>
-                            <td>Rp. {{ number_format( $item->sub_total, 0,',','.') }}</td>
+                            <td>Rp. {{ number_format( $item->harga_beli) }}</td>
+                            <td>Rp. {{ number_format( $item->sub_total) }}</td>
                         </tr>
                     @endforeach
                     <tr>
                         <td colspan="4" class="text-bold text-right">Total Pembelian</td>
-                        <td class="text-bold">Rp. {{ number_format( $data->total, 0,',','.') }}</td>
+                        <td class="text-bold">Rp. {{ number_format( $data->total) }}</td>
                     </tr>
                 </tbody>
             </table>
